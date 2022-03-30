@@ -5,7 +5,7 @@ import path from 'path';
 import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import router from './routers/index.js';
+import router from './routers';
 
 import { tryCredentials } from './utilities/authorise.js';
 
