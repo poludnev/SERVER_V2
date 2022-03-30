@@ -1,11 +1,9 @@
 import express from 'express';
 
-import moneyController from '../controllers/moneyController.js';
-import usersController from '../controllers/usersController.js';
-import healthController from '../controllers/healthController.js';
-
+import controllers from '../controllers';
 import routes from '../lib/routes/apiRoutes.js';
 
+const { usersController, moneyController, healthController } = controllers;
 const apiRouter = express.Router();
 
 apiRouter.route(routes.addUserRoute()).post(usersController.addMoneyUser);

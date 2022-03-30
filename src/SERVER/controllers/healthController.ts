@@ -16,7 +16,6 @@ import { getUserIdByLogin } from '../handlers/usersHandler.js';
 import { BodyCondition, Excercise } from '../types/healthClasses.js';
 
 export const getBody: RequestHandler = async (req, res) => {
-  // const { params, body } = req;
   const { id } = req.params;
   if (id) {
     const response = await getBodyByIdHandler(id);
@@ -28,7 +27,6 @@ export const getBody: RequestHandler = async (req, res) => {
 };
 
 export const getTraining: RequestHandler = async (req, res) => {
-  // const { params, body } = req;
   const { id } = req.params;
   if (id) {
     const response = await getTrainingByIdHandler(id);
@@ -40,21 +38,19 @@ export const getTraining: RequestHandler = async (req, res) => {
 };
 
 export const updateBody: RequestHandler = async (req, res) => {
-  const { params, body } = req;
   const { id, fieldsToUpdate } = req.body;
-  const updateTimestamp = await updateBodyHandler(id, fieldsToUpdate);
-  res.status(200).json({ updateBody: 'ok', updateTimestamp });
+  const response = await updateBodyHandler(id, fieldsToUpdate);
+  res.status(200).json(response);
 };
 
 export const updateTraining: RequestHandler = async (req, res) => {
-  const { params, body } = req;
   const { id, fieldsToUpdate } = req.body;
-  const updateTimestamp = await updateTrainingHandler(id, fieldsToUpdate);
-  res.status(200).json({ updateTraining: 'ok', updateTimestamp });
+  const response = await updateTrainingHandler(id, fieldsToUpdate);
+  res.status(200).json(response);
 };
 
 export const addBody: RequestHandler = async (req, res) => {
-  const { params, body } = req;
+  const { body } = req;
   const { timestamp, weight, login, bmi, height } = body;
   console.log(timestamp, weight, login, bmi, height);
   if (!timestamp || !login || !weight) {
@@ -73,11 +69,11 @@ export const addBody: RequestHandler = async (req, res) => {
   const date = new Date(timestamp);
   const bodyData = new BodyCondition(date, weight, userId, bmi, height);
   const response = await addBodyHandler(bodyData);
-  res.status(200).json({ addBody: 'ok', response });
+  res.status(200).json(response);
 };
 
 export const addTraining: RequestHandler = async (req, res) => {
-  const { params, body } = req;
+  const { body } = req;
   const { timestamp, login, title, duration, load, calories } = body;
   if (!timestamp || !login || !title || !duration || !load || !calories) {
     if (!login) {
@@ -102,21 +98,19 @@ export const addTraining: RequestHandler = async (req, res) => {
     calories
   );
   const response = await addTrainingHandler(exerciseData);
-  res.status(200).json({ addTraining: 'ok', response });
+  res.status(200).json(response);
 };
 
 export const deleteBody: RequestHandler = async (req, res) => {
-  const { params, body } = req;
   const { id } = req.body;
   const response = await setBodyToDeleteHandler(id);
-  res.status(200).json({ deleteBody: 'ok', response });
+  res.status(200).json(response);
 };
 
 export const deleteTraining: RequestHandler = async (req, res) => {
-  const { params, body } = req;
   const { id } = req.body;
   const response = await setTrainingToDeleteHandler(id);
-  res.status(200).json({ deleteTraining: 'ok', response });
+  res.status(200).json(response);
 };
 
 export default {

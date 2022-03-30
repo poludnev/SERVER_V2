@@ -18,53 +18,46 @@ import { getUserIdByLogin } from '../handlers/usersHandler.js';
 import { Income, Expense, Balance } from '../types/moneyClasses.js';
 
 export const getMoney: RequestHandler = async (req, res) => {
-  console.log('request money');
   const { id } = req.params;
   if (id) {
     const response = await getMoneyByIdHandler(id);
-    res.status(200).json({ getMoneyById: 'ok', response });
+    res.status(200).json(response);
     return;
   }
   const response = await getMoneyHandler();
-
   res.status(200).json(response);
 };
 
 export const getExpenses: RequestHandler = async (req, res) => {
-  const { params, query } = req;
   const response = await getExpensesHandler();
-  res.status(200).json({ getExpenses: 'ok', params, query, response });
+  res.status(200).json(response);
 };
 
 export const getIncomes: RequestHandler = async (req, res) => {
-  const { params, query } = req;
   const response = await getIncomesHandler();
-  res.status(200).json({ getIncomes: 'ok', params, query, response });
+  res.status(200).json(response);
 };
 
 export const getBalances: RequestHandler = async (req, res) => {
-  const { params, query } = req;
   const { id } = req.params;
   if (id) {
     const response = await getBalanceByIdHandler(id);
-    res.status(200).json({ getMoneyById: 'ok', response });
+    res.status(200).json(response);
     return;
   }
   const response = await getBalanceHandler();
-  res.status(200).json({ getBalances: 'ok', params, query, response });
+  res.status(200).json(response);
 };
 
 export const updateMoney: RequestHandler = async (req, res) => {
-  const { params, body } = req;
   const { id } = req.params;
   const response = await updateMoneyHandler(id, req.body);
-  res.status(200).json({ updateMonay: 'ok', params, body, response });
+  res.status(200).json(response);
 };
 export const updateBalance: RequestHandler = async (req, res) => {
-  const { params, body } = req;
   const { id } = req.params;
   const response = await updateBalanceHandler(id, req.body);
-  res.status(200).json({ updateMonay: 'ok', params, body, response });
+  res.status(200).json(response);
 };
 
 export const addExpense: RequestHandler = async (req, res) => {
@@ -102,7 +95,7 @@ export const addExpense: RequestHandler = async (req, res) => {
     description
   );
   const response = await addExpenseHandler(expense);
-  res.status(200).json({ addExpense: 'ok', data, response });
+  res.status(200).json(response);
 };
 
 export const addIncome: RequestHandler = async (req, res) => {
@@ -129,11 +122,10 @@ export const addIncome: RequestHandler = async (req, res) => {
     balance
   );
   const response = await addIncomeHandler(income);
-  res.status(200).json({ addIncome: 'ok', data, response });
+  res.status(200).json(response);
 };
 
 export const addBalance: RequestHandler = async (req, res) => {
-  const data = req.body;
   const {
     timestamp,
     amount,
@@ -166,26 +158,26 @@ export const addBalance: RequestHandler = async (req, res) => {
     payee
   );
   const response = await addBalanceHandler(updatedBalance);
-  res.status(200).json({ addBalance: 'ok', data, response });
+  res.status(200).json(response);
 };
 
 export const deleteExpenses: RequestHandler = async (req, res) => {
   const { id } = req.body;
   const response = await setMoneyToDeleteHandler(id);
 
-  res.status(200).json({ delete: 'expense', response });
+  res.status(200).json(response);
 };
 
 export const deleteIncomes: RequestHandler = async (req, res) => {
   const { id } = req.body;
   const response = await setMoneyToDeleteHandler(id);
-  res.status(200).json({ delete: 'income', response });
+  res.status(200).json(response);
 };
 
 export const deleteBalance: RequestHandler = async (req, res) => {
   const { id } = req.body;
   const response = await setBalanceToDeleteHandler(id);
-  res.status(200).json({ delete: 'balance', response });
+  res.status(200).json(response);
 };
 
 export default {

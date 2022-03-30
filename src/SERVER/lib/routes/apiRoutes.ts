@@ -1,6 +1,3 @@
-import { getBody } from '../../controllers/healthController';
-import { addExpense, getExpenses } from '../../controllers/moneyController';
-
 export default {
   getUsersRoute(): string {
     return '/v1/money/users';

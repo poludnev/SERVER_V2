@@ -8,22 +8,23 @@ import {
   getUserByLoginHandler,
   setUserToDeleteHandler
 } from '../handlers/usersHandler.js';
+
 import { User } from '../types/userClasses.js';
 
 export const getMoneyUsers: RequestHandler = async (req, res) => {
-  const { params, query } = req;
+  const { params } = req;
   if (params.login) {
     const response = await getUserByLoginHandler(params.login);
-    res.status(200).json({ getExpenses: 'ok', params, query, response });
+    res.status(200).json(response);
     return;
   }
-  const { status, data } = await getUsersWithoutDeletedHandler();
-  res.status(200).json({ data });
+  const response = await getUsersWithoutDeletedHandler();
+  res.status(200).json(response);
 };
 
 export const getMoneyUsersAll: RequestHandler = async (req, res) => {
   const response = await getUsersAllHandler();
-  res.status(200).json({ getExpenses: 'ok', response });
+  res.status(200).json(response);
 };
 
 export const addMoneyUser: RequestHandler = async (req, res) => {
@@ -39,7 +40,7 @@ export const addMoneyUser: RequestHandler = async (req, res) => {
   }
   const user = new User(email, login, password);
   const response = await addUserHandler(user);
-  res.status(200).json({ response });
+  res.status(200).json(response);
 };
 
 export const deleteMoneyUser: RequestHandler = async (req, res) => {
@@ -49,9 +50,12 @@ export const deleteMoneyUser: RequestHandler = async (req, res) => {
     return;
   }
   const response = await setUserToDeleteHandler(login);
-  res.status(200).json({ test: 'test', login, response });
+  res.status(200).json(response);
 };
 
 export default {
-  getMoneyUsers, addMoneyUser, deleteMoneyUser, getMoneyUsersAll
-}
+  getMoneyUsers,
+  addMoneyUser,
+  deleteMoneyUser,
+  getMoneyUsersAll
+};
