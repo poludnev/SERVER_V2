@@ -1,77 +1,57 @@
 import express from 'express';
 
-import {
-  getMoney,
-  getExpenses,
-  getIncomes,
-  getBalances,
-  updateMoney,
-  updateBalance,
-  addExpense,
-  addIncome,
-  addBalance,
-  deleteExpenses,
-  deleteIncomes,
-  deleteBalance
-} from '../controllers/moneyController.js';
-import {
-  addMoneyUser,
-  getMoneyUsers,
-  deleteMoneyUser,
-  getMoneyUsersAll
-} from '../controllers/userController.js';
-import {
-  getBody,
-  getTraining,
-  updateBody,
-  updateTraining,
-  addBody,
-  addTraining,
-  deleteBody,
-  deleteTraining
-} from '../controllers/healthController.js';
+import moneyController from '../controllers/moneyController.js';
+import usersController from '../controllers/usersController.js';
+import healthController from '../controllers/healthController.js';
 
 const apiRouter = express.Router();
 
-apiRouter.route('/v1/money/user').post(addMoneyUser);
-apiRouter.route('/v1/money/users').get(getMoneyUsers);
-apiRouter.route('/v1/money/users/all').get(getMoneyUsersAll);
-apiRouter.route('/v1/money/users/:login').get(getMoneyUsers);
-apiRouter.route('/v1/money/user/delete').post(deleteMoneyUser);
+apiRouter.route('/v1/money/user').post(usersController.addMoneyUser);
+apiRouter.route('/v1/money/users').get(usersController.getMoneyUsers);
+apiRouter.route('/v1/money/users/all').get(usersController.getMoneyUsersAll);
+apiRouter.route('/v1/money/users/:login').get(usersController.getMoneyUsers);
+apiRouter.route('/v1/money/user/delete').post(usersController.deleteMoneyUser);
 
-apiRouter.route('/v1/money/get/:id').get(getMoney);
-apiRouter.route('/v1/money/get').get(getMoney);
-apiRouter.route('/v1/money/expense/get').get(getExpenses);
-apiRouter.route('/v1/money/income/get').get(getIncomes);
-apiRouter.route('/v1/money/balance/get').get(getBalances);
-apiRouter.route('/v1/money/balance/get/:id').get(getBalances);
+apiRouter.route('/v1/money/get/:id').get(moneyController.getMoney);
+apiRouter.route('/v1/money/get').get(moneyController.getMoney);
+apiRouter.route('/v1/money/expense/get').get(moneyController.getExpenses);
+apiRouter.route('/v1/money/income/get').get(moneyController.getIncomes);
+apiRouter.route('/v1/money/balance/get').get(moneyController.getBalances);
+apiRouter.route('/v1/money/balance/get/:id').get(moneyController.getBalances);
 
-apiRouter.route('/v1/money/update/:id').post(updateMoney);
-apiRouter.route('/v1/money/balance/update/:id').post(updateBalance);
+apiRouter.route('/v1/money/update/:id').post(moneyController.updateMoney);
+apiRouter
+  .route('/v1/money/balance/update/:id')
+  .post(moneyController.updateBalance);
 
-apiRouter.route('/v1/money/expense/add').post(addExpense);
-apiRouter.route('/v1/money/income/add').post(addIncome);
-apiRouter.route('/v1/money/balance/add').post(addBalance);
+apiRouter.route('/v1/money/expense/add').post(moneyController.addExpense);
+apiRouter.route('/v1/money/income/add').post(moneyController.addIncome);
+apiRouter.route('/v1/money/balance/add').post(moneyController.addBalance);
 
-apiRouter.route('/v1/money/expense/delete').post(deleteExpenses);
-apiRouter.route('/v1/money/income/delete').post(deleteIncomes);
-apiRouter.route('/v1/money/balance/delete').post(deleteBalance);
+apiRouter
+  .route('/v1/money/expense/delete')
+  .post(moneyController.deleteExpenses);
+apiRouter.route('/v1/money/income/delete').post(moneyController.deleteIncomes);
+apiRouter.route('/v1/money/balance/delete').post(moneyController.deleteBalance);
 
-apiRouter.route('/v1/health/body/get').get(getBody);
-apiRouter.route('/v1/health/body/get/:id').get(getBody);
-apiRouter.route('/v1/health/training/get').get(getTraining);
-apiRouter.route('/v1/health/training/get/:id').get(getTraining);
+apiRouter.route('/v1/health/body/get').get(healthController.getBody);
+apiRouter.route('/v1/health/body/get/:id').get(healthController.getBody);
+apiRouter.route('/v1/health/training/get').get(healthController.getTraining);
+apiRouter
+  .route('/v1/health/training/get/:id')
+  .get(healthController.getTraining);
 
-apiRouter.route('/v1/health/body/update/').post(updateBody);
-apiRouter.route('/v1/health/training/update/').post(updateTraining);
+apiRouter.route('/v1/health/body/update/').post(healthController.updateBody);
+apiRouter
+  .route('/v1/health/training/update/')
+  .post(healthController.updateTraining);
 
-apiRouter.route('/v1/health/body/add').post(addBody);
-apiRouter.route('/v1/health/training/add').post(addTraining);
+apiRouter.route('/v1/health/body/add').post(healthController.addBody);
+apiRouter.route('/v1/health/training/add').post(healthController.addTraining);
 
-apiRouter.route('/v1/health/body/delete').post(deleteBody);
-apiRouter.route('/v1/health/training/delete').post(deleteTraining);
-
-// apiRouter.route('/:user/').get(api2);
-// apiRouter.route('/:user/:test').get(api3);
+apiRouter.route('/v1/health/body/delete').post(healthController.deleteBody);
+apiRouter
+  .route('/v1/health/training/delete')
+  .post(healthController.deleteTraining);
 
 export default apiRouter;

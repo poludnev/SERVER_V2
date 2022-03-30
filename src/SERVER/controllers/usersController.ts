@@ -51,3 +51,7 @@ export const deleteMoneyUser: RequestHandler = async (req, res) => {
   const response = await setUserToDeleteHandler(login);
   res.status(200).json({ test: 'test', login, response });
 };
+
+export default {
+  getMoneyUsers, addMoneyUser, deleteMoneyUser, getMoneyUsersAll
+}
