@@ -5,7 +5,7 @@ import path from 'path';
 import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import router from './routes/index.js';
+import router from './routers/index.js';
 
 import { tryCredentials } from './utilities/authorise.js';
 
@@ -39,10 +39,9 @@ const corsConfiguration: { origin: string[] } = {
 };
 
 appHTTPS.use(cors(corsConfiguration));
-appHTTPS.use(express.static(path.resolve(__dirname, './Ver2/dist/APP')));
+// appHTTPS.use(express.static(path.resolve(__dirname, './Ver2/dist/APP')));
 
 appHTTPS.use('/api', router.apiRouter);
-appHTTPS.use('/', router.indexRouter);
 
 const keyAddress: string = path.resolve(
   path.format({
