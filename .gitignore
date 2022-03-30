@@ -1,0 +1,9 @@
+node_modules
+
+dist
+
+cert
+
+firebase-adminsdk-credentials.json
+
+.DS_Store
