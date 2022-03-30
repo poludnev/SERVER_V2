@@ -187,3 +187,18 @@ export const deleteBalance: RequestHandler = async (req, res) => {
   const response = await setBalanceToDeleteHandler(id);
   res.status(200).json({ delete: 'balance', response });
 };
+
+export default {
+  getMoney,
+  getExpenses,
+  getIncomes,
+  getBalances,
+  updateMoney,
+  updateBalance,
+  addExpense,
+  addIncome,
+  addBalance,
+  deleteExpenses,
+  deleteIncomes,
+  deleteBalance
+};

@@ -118,3 +118,14 @@ export const deleteTraining: RequestHandler = async (req, res) => {
   const response = await setTrainingToDeleteHandler(id);
   res.status(200).json({ deleteTraining: 'ok', response });
 };
+
+export default {
+  getBody,
+  getTraining,
+  updateBody,
+  updateTraining,
+  addBody,
+  addTraining,
+  deleteBody,
+  deleteTraining
+};
