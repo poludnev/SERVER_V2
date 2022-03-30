@@ -12,13 +12,13 @@ import {
   addBalance,
   deleteExpenses,
   deleteIncomes,
-  deleteBalance,
+  deleteBalance
 } from '../controllers/moneyController.js';
 import {
   addMoneyUser,
   getMoneyUsers,
   deleteMoneyUser,
-  getMoneyUsersAll,
+  getMoneyUsersAll
 } from '../controllers/userController.js';
 import {
   getBody,
@@ -28,7 +28,7 @@ import {
   addBody,
   addTraining,
   deleteBody,
-  deleteTraining,
+  deleteTraining
 } from '../controllers/healthController.js';
 
 const apiRouter = express.Router();

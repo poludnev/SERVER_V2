@@ -1,4 +1,4 @@
-import { json, RequestHandler } from 'express';
+import { RequestHandler } from 'express';
 
 import {
   getBodyshandler,
@@ -10,15 +10,15 @@ import {
   updateBodyHandler,
   updateTrainingHandler,
   setBodyToDeleteHandler,
-  setTrainingToDeleteHandler,
+  setTrainingToDeleteHandler
 } from '../handlers/healthHandler.js';
 import { getUserIdByLogin } from '../handlers/usersHandler.js';
 import { BodyCondition, Excercise } from '../types/healthClasses.js';
 
 export const getBody: RequestHandler = async (req, res) => {
-  const { params, body } = req;
+  // const { params, body } = req;
   const { id } = req.params;
-  if (!!id) {
+  if (id) {
     const response = await getBodyByIdHandler(id);
     res.status(200).json(response);
     return;
@@ -28,9 +28,9 @@ export const getBody: RequestHandler = async (req, res) => {
 };
 
 export const getTraining: RequestHandler = async (req, res) => {
-  const { params, body } = req;
+  // const { params, body } = req;
   const { id } = req.params;
-  if (!!id) {
+  if (id) {
     const response = await getTrainingByIdHandler(id);
     res.status(200).json(response);
     return;
@@ -99,7 +99,7 @@ export const addTraining: RequestHandler = async (req, res) => {
     title,
     duration,
     load,
-    calories,
+    calories
   );
   const response = await addTrainingHandler(exerciseData);
   res.status(200).json({ addTraining: 'ok', response });

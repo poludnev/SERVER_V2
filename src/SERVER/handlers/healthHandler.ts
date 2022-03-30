@@ -4,7 +4,7 @@ import {
   getDocuments,
   getDocumentById,
   getDocumentsByField,
-  updateDocumentData,
+  updateDocumentData
 } from '../firebase/firebase.js';
 
 import { BodyCondition, Excercise } from '../types/healthClasses.js';
@@ -36,7 +36,7 @@ export const updateBodyHandler = async (id: string, fieldsToUpdate: {}) => {
     const response = await updateDocumentData(
       bodyCollectionPath,
       id,
-      fieldsToUpdate,
+      fieldsToUpdate
     );
     return response;
   } catch (e) {
@@ -49,7 +49,7 @@ export const updateTrainingHandler = async (id: string, fieldsToUpdate: {}) => {
     const response = await updateDocumentData(
       trainingCollectionPath,
       id,
-      fieldsToUpdate,
+      fieldsToUpdate
     );
     return response;
   } catch (e) {
@@ -70,7 +70,7 @@ export const addTrainingHandler = async (exercise: Excercise) => {
 export const setBodyToDeleteHandler = async (id: string) => {
   try {
     const deletedTimestamp = await updateDocumentData(bodyCollectionPath, id, {
-      toDelete: true,
+      toDelete: true
     });
     return { status: 'deleted', time: deletedTimestamp };
   } catch (e) {
@@ -84,8 +84,8 @@ export const setTrainingToDeleteHandler = async (id: string) => {
       trainingCollectionPath,
       id,
       {
-        toDelete: true,
-      },
+        toDelete: true
+      }
     );
     return { status: 'deleted', time: deletedTimestamp };
   } catch (e) {

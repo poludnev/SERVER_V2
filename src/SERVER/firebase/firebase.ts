@@ -9,13 +9,13 @@ const db = getFirestore();
 
 const getDataFromSnapShot = (
   snapshot: QuerySnapshot,
-  filterOptions: { toDelete?: boolean } = {},
+  filterOptions: { toDelete?: boolean } = {}
 ): Data => {
   const data: Data = {};
   snapshot.forEach((doc) => {
     const docData = doc.data();
     if (filterOptions.toDelete && docData.toDelete) return;
-    if (!!docData.date) {
+    if (docData.date) {
       docData.timestamp = docData.date.toMillis();
     }
     data[doc.id] = docData;
@@ -25,7 +25,7 @@ const getDataFromSnapShot = (
 
 export const addDocument = async (
   collectionPath: string,
-  data: {},
+  data: {}
 ): Promise<string> => {
   const docRef = db.collection(collectionPath);
   const response = await docRef.add(data);
@@ -41,7 +41,7 @@ export const getDocuments = async (collectionPath: string): Promise<Data> => {
 export const getDocumentById = async (collectionPath: string, id: string) => {
   const data = await (await db.collection(collectionPath).doc(id).get()).data();
   if (!data) return null;
-  if (!!data.date) {
+  if (data.date) {
     data.timestamp = data.date.toMillis();
   }
   return data;
@@ -50,7 +50,7 @@ export const getDocumentById = async (collectionPath: string, id: string) => {
 export const getDocumentsByField = async (
   collectionPath: string,
   fieldName: string,
-  fieldValue: any,
+  fieldValue: any
 ): Promise<Data> => {
   const docRef = db.collection(collectionPath);
   const snapshot = await docRef.where(fieldName, '==', fieldValue).get();
@@ -59,7 +59,7 @@ export const getDocumentsByField = async (
 
 export const getDocumentsWithoutField = async (
   collectionPath: string,
-  fieldName: string,
+  fieldName: string
 ): Promise<Data> => {
   const docRef = db.collection(collectionPath);
   const snapshot = await docRef.get();
@@ -69,7 +69,7 @@ export const getDocumentsWithoutField = async (
 export const updateDocumentData = async (
   collectionPath: string,
   id: string,
-  fieldsTooUpdate: {},
+  fieldsTooUpdate: {}
 ): Promise<number | Error> => {
   const docRef = await db.collection(collectionPath).doc(id);
 

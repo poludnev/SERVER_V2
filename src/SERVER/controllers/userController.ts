@@ -6,13 +6,13 @@ import {
   getUsersWithoutDeletedHandler,
   getUserIdByLogin,
   getUserByLoginHandler,
-  setUserToDeleteHandler,
+  setUserToDeleteHandler
 } from '../handlers/usersHandler.js';
 import { User } from '../types/userClasses.js';
 
 export const getMoneyUsers: RequestHandler = async (req, res) => {
   const { params, query } = req;
-  if (!!params.login) {
+  if (params.login) {
     const response = await getUserByLoginHandler(params.login);
     res.status(200).json({ getExpenses: 'ok', params, query, response });
     return;
@@ -33,7 +33,7 @@ export const addMoneyUser: RequestHandler = async (req, res) => {
     return;
   }
   const { id } = await getUserIdByLogin(login);
-  if (!!id) {
+  if (id) {
     res.status(422).json({ error: 'user login already exists' });
     return;
   }

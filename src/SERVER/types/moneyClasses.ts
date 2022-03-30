@@ -16,7 +16,7 @@ export class Money {
     userName?: string,
     description?: string,
     payer?: string,
-    payee?: string,
+    payee?: string
   ) {
     this.date = date;
     this.userId = userId;
@@ -30,8 +30,8 @@ export class Money {
 }
 
 export class Balance extends Money {
-  type: string = 'balance';
-  balance: number = 0;
+  type = 'balance';
+  balance = 0;
 
   constructor(
     date: Date,
@@ -42,7 +42,7 @@ export class Balance extends Money {
     balance?: number,
     description?: string,
     payer?: string,
-    payee?: string,
+    payee?: string
   ) {
     super(date, userId, amount, currency, userName, description, payer, payee);
     this.balance = balance || 0;
@@ -59,7 +59,7 @@ export class Balance extends Money {
       balance: this.balance,
       description: this.description,
       payer: this.payer,
-      payee: this.payee,
+      payee: this.payee
     };
   }
 }
@@ -70,7 +70,7 @@ export class Expense {
   amount: number;
   currency: string;
   category: string;
-  type: string = 'expense';
+  type = 'expense';
   userName?: string;
   balance?: number;
   description?: string;
@@ -83,7 +83,7 @@ export class Expense {
     category: string,
     userName?: string,
     balance?: number,
-    description?: string,
+    description?: string
   ) {
     this.date = date;
     this.userId = userId;
@@ -105,7 +105,7 @@ export class Expense {
       category: this.category,
       type: this.type,
       balance: this.balance,
-      description: this.description,
+      description: this.description
     };
   }
 }
@@ -117,7 +117,7 @@ export class Income {
   currency: string;
   userName: string;
   category: string;
-  type: string = 'income';
+  type = 'income';
   balance?: number;
 
   constructor(
@@ -127,7 +127,7 @@ export class Income {
     curency: string,
     category: string,
     userName?: string,
-    balance?: number,
+    balance?: number
   ) {
     this.date = date || new Date();
     this.userId = userId;
@@ -147,7 +147,7 @@ export class Income {
       userName: this.userName,
       category: this.category,
       type: this.type,
-      balance: this.balance,
+      balance: this.balance
     };
   }
 }

@@ -12,7 +12,7 @@ import {
   addExpenseHandler,
   addBalanceHandler,
   setMoneyToDeleteHandler,
-  setBalanceToDeleteHandler,
+  setBalanceToDeleteHandler
 } from '../handlers/moneyHandler.js';
 import { getUserIdByLogin } from '../handlers/usersHandler.js';
 import { Income, Expense, Balance } from '../types/moneyClasses.js';
@@ -20,7 +20,7 @@ import { Income, Expense, Balance } from '../types/moneyClasses.js';
 export const getMoney: RequestHandler = async (req, res) => {
   console.log('request money');
   const { id } = req.params;
-  if (!!id) {
+  if (id) {
     const response = await getMoneyByIdHandler(id);
     res.status(200).json({ getMoneyById: 'ok', response });
     return;
@@ -45,7 +45,7 @@ export const getIncomes: RequestHandler = async (req, res) => {
 export const getBalances: RequestHandler = async (req, res) => {
   const { params, query } = req;
   const { id } = req.params;
-  if (!!id) {
+  if (id) {
     const response = await getBalanceByIdHandler(id);
     res.status(200).json({ getMoneyById: 'ok', response });
     return;
@@ -77,7 +77,7 @@ export const addExpense: RequestHandler = async (req, res) => {
     userName,
     category,
     balance,
-    description,
+    description
   } = req.body;
   if (!userName) {
     res.status(422).json({ error: 'no userName' });
@@ -99,7 +99,7 @@ export const addExpense: RequestHandler = async (req, res) => {
     category,
     userName,
     Number(balance),
-    description,
+    description
   );
   const response = await addExpenseHandler(expense);
   res.status(200).json({ addExpense: 'ok', data, response });
@@ -126,7 +126,7 @@ export const addIncome: RequestHandler = async (req, res) => {
     currency,
     category,
     userName,
-    balance,
+    balance
   );
   const response = await addIncomeHandler(income);
   res.status(200).json({ addIncome: 'ok', data, response });
@@ -142,7 +142,7 @@ export const addBalance: RequestHandler = async (req, res) => {
     balance,
     description,
     payer,
-    payee,
+    payee
   } = req.body;
   if (!userName) {
     res.status(422).json({ error: 'no userName' });
@@ -163,7 +163,7 @@ export const addBalance: RequestHandler = async (req, res) => {
     balance,
     description,
     payer,
-    payee,
+    payee
   );
   const response = await addBalanceHandler(updatedBalance);
   res.status(200).json({ addBalance: 'ok', data, response });

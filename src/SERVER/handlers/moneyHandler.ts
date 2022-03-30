@@ -3,7 +3,7 @@ import {
   getDocuments,
   getDocumentById,
   getDocumentsByField,
-  updateDocumentData,
+  updateDocumentData
 } from '../firebase/firebase.js';
 
 import { Income, Expense, Balance } from '../types/moneyClasses.js';
@@ -26,7 +26,7 @@ export const getExpensesHandler = async () => {
   const data = await getDocumentsByField(
     currentCollectionPath,
     'type',
-    'expense',
+    'expense'
   );
   return data;
 };
@@ -35,7 +35,7 @@ export const getIncomesHandler = async () => {
   const data = await getDocumentsByField(
     currentCollectionPath,
     'type',
-    'income',
+    'income'
   );
   return data;
 };
@@ -56,7 +56,7 @@ export const updateMoneyHandler = async (id: string, fieldsToUpdate: {}) => {
     const updateTimestamp = await updateDocumentData(
       currentCollectionPath,
       id,
-      fieldsToUpdate,
+      fieldsToUpdate
     );
     return { status: 'succeed', updateTimestamp };
   } catch (e) {
@@ -69,7 +69,7 @@ export const updateBalanceHandler = async (id: string, fieldsToUpdate: {}) => {
     const updateTimestamp = await updateDocumentData(
       currentCollectionPath,
       id,
-      fieldsToUpdate,
+      fieldsToUpdate
     );
     return { status: 'succeed', updateTimestamp };
   } catch (e) {
@@ -98,8 +98,8 @@ export const setMoneyToDeleteHandler = async (id: string) => {
       currentCollectionPath,
       id,
       {
-        toDelete: true,
-      },
+        toDelete: true
+      }
     );
     return { status: 'deleted', time: deletedTimestamp };
   } catch (e) {
@@ -113,8 +113,8 @@ export const setBalanceToDeleteHandler = async (id: string) => {
       balanceCollectionPath,
       id,
       {
-        toDelete: true,
-      },
+        toDelete: true
+      }
     );
     return { status: 'deleted', time: deletedTimestamp };
   } catch (e) {

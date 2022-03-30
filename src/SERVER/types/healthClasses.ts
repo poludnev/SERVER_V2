@@ -12,7 +12,7 @@ export class BodyCondition {
     weight: number,
     userId: string,
     bmi?: number | null,
-    height?: number,
+    height?: number
   ) {
     this.date = date;
     this.weight = weight;
@@ -32,7 +32,7 @@ export class BodyCondition {
       userId: this.userId,
       weight: this.weight,
       bmi: this.bmi,
-      height: this.height,
+      height: this.height
     };
   }
 }
@@ -51,7 +51,7 @@ export class Excercise {
     title: string,
     duration: number,
     load: number,
-    calories: number,
+    calories: number
   ) {
     this.date = date;
     this.userId = userId;
@@ -68,7 +68,7 @@ export class Excercise {
       title: this.title,
       duration: this.duration,
       load: this.load,
-      calories: this.calories,
+      calories: this.calories
     };
   }
 }

@@ -4,4 +4,6 @@ dist
 
 cert
 
-server1-ac468-firebase-adminsdk-*
+firebase-adminsdk-credentials.json
+
+.DS_Store
