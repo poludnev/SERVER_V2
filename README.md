@@ -8,6 +8,7 @@ Users Information http requests:
 
 GET:
 /api/v1/money/users
+response: 
 {
 "status": "succeed",
 "data": {
