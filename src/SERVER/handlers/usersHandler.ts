@@ -6,10 +6,12 @@ import {
   getDocumentsWithoutField
 } from '../firebase/firebase.js';
 
+import collectionsPath from '../lib/collections/collectionsPath.js';
+
 import { User } from '../types/userClasses.js';
 import { Data } from '../firebase/types.js';
 
-const currentCollectionPath = 'users-test';
+const currentCollectionPath = collectionsPath.getUsersCollectionPath();
 
 export const addUserHandler = async (
   user: User
@@ -56,7 +58,9 @@ export const getUserIdByLogin = async (
   return { status: 'succeed', id };
 };
 
-export const setUserToDeleteHandler = async (login: string): Promise<{}> => {
+export const setUserToDeleteHandler = async (
+  login: string
+): Promise<{ status: string; error?: string; time?: number | Error }> => {
   const { id } = await getUserIdByLogin(login);
 
   if (!id) return { status: 'failed', error: 'user does not exist' };

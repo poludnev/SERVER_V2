@@ -88,3 +88,283 @@ response if error:
 {
 "error": "no login"
 }
+
+Money information http requests:
+GET:
+api/v1/money/get
+response:
+{
+"status": "succeed",
+"data": {
+"6x3oCP7fcJthfd5p2NII": {
+"date": {
+"\_seconds": 1234567645,
+"\_nanoseconds": 888000000
+},
+"userId": "xBUSWsTp9BGnH0uJuTHl",
+"balance": 0,
+"type": "income",
+"userName": "roman.poludnev",
+"category": "testcategory",
+"currency": "RUB",
+"amount": 15000,
+"timestamp": 1234567645888
+},
+"Ob61YyaeLFl2C8cjFlGM": {
+"category": "NA",
+"currency": "RUB",
+"balance": 0,
+"userId": "D05CfkFE89fzfAJjttRs",
+"description": "NA",
+"date": {
+"\_seconds": 5515438562,
+"\_nanoseconds": 342000000
+},
+"amount": 13455,
+"userName": "newuser2",
+"type": "expense",
+"timestamp": 5515438562342
+},
+}}
+
+https://localhost/api/v1/money/expense/get
+{
+"status": "succeed",
+"data": {
+"Ob61YyaeLFl2C8cjFlGM": {
+"date": {
+"\_seconds": 5515438562,
+"\_nanoseconds": 342000000
+},
+"type": "expense",
+"description": "NA",
+"userName": "newuser2",
+"userId": "D05CfkFE89fzfAJjttRs",
+"currency": "RUB",
+"balance": 0,
+"category": "NA",
+"amount": 13455,
+"timestamp": 5515438562342
+},
+"oz4S1PRQjAIsS1RHLzjg": {
+"userId": "D05CfkFE89fzfAJjttRs",
+"userName": "newuser2",
+"type": "expense",
+"date": {
+"\_seconds": 5515438562,
+"\_nanoseconds": 342000000
+},
+"balance": 0,
+"currency": "RUB",
+"category": "NA",
+"description": "NA",
+"amount": 1,
+"timestamp": 5515438562342
+}
+}
+}
+
+https://localhost/api/v1/money/income/get
+{
+"status": "succeed",
+"data": {
+"6x3oCP7fcJthfd5p2NII": {
+"currency": "RUB",
+"userId": "xBUSWsTp9BGnH0uJuTHl",
+"date": {
+"\_seconds": 1234567645,
+"\_nanoseconds": 888000000
+},
+"type": "income",
+"amount": 15000,
+"category": "testcategory",
+"userName": "roman.poludnev",
+"balance": 0,
+"timestamp": 1234567645888
+},
+"yUUZ522ARFwwF2nUZd85": {
+"amount": 15000,
+"userName": "roman.poludnev",
+"type": "income",
+"userId": "xBUSWsTp9BGnH0uJuTHl",
+"balance": 0,
+"date": {
+"\_seconds": 12345677,
+"\_nanoseconds": 888000000
+},
+"category": "testcategory",
+"currency": "RUB",
+"timestamp": 12345677888
+}
+}
+}
+
+https://localhost/api/v1/money/balance/get
+
+{
+"status": "succeed",
+"data": {
+"1trj6zS5eoBM4ilrnJz8": {
+"userId": "xBUSWsTp9BGnH0uJuTHl",
+"currency": "RUB",
+"userName": "roman.poludnev",
+"type": "balance",
+"amount": "15000",
+"date": {
+"\_seconds": 12345677,
+"\_nanoseconds": 888000000
+},
+"timestamp": 12345677888
+},
+"BLP0dwaa1Dqs2O43aPdw": {
+"userName": "roman.poludnev",
+"currency": "USD",
+"type": "balance",
+"amount": 321,
+"userId": "xBUSWsTp9BGnH0uJuTHl",
+"date": {
+"\_seconds": 1645954860,
+"\_nanoseconds": 0
+},
+"timestamp": 1645954860000
+},
+}}
+
+    https://localhost/api/v1/money/get/Ob61YyaeLFl2C8cjFlGM
+    {
+    "status": "succeed",
+    "data": {
+        "currency": "RUB",
+        "category": "NA",
+        "balance": 0,
+        "type": "expense",
+        "userName": "newuser2",
+        "date": {
+            "_seconds": 5515438562,
+            "_nanoseconds": 342000000
+        },
+        "amount": 13455,
+        "userId": "D05CfkFE89fzfAJjttRs",
+        "description": "NA",
+        "timestamp": 5515438562342
+    }
+
+}
+
+https://localhost/api/v1/money/balance/get/1trj6zS5eoBM4ilrnJz8
+
+{
+"status": "succeed",
+"data": {
+"date": {
+"\_seconds": 12345677,
+"\_nanoseconds": 888000000
+},
+"currency": "RUB",
+"userName": "roman.poludnev",
+"amount": "15000",
+"userId": "xBUSWsTp9BGnH0uJuTHl",
+"type": "balance",
+"timestamp": 12345677888
+}
+}
+
+POST:
+https://localhost/api/v1/money/expense/add/
+request body:
+{
+"timestamp": "5515438562342",
+"amount": "13455",
+"currency": "RUB",
+"userName": "newuser2"
+}
+response:
+{
+"status": "succeed",
+"id": "dWzG91Srz6Aq3dzIHMOP"
+}
+
+https://localhost/api/v1/money/income/add/
+request body:
+{
+"timestamp": "1234567645888",
+"amount": "15000",
+"currency": "RUB",
+"userName": "roman.poludnev",
+"category": "testcategory"
+}
+response:
+{
+"status": "succeed",
+"id": "X8bZczo1sWAV11bmhU0B"
+}
+
+https://localhost/api/v1/money/balance/add/
+request body:
+{
+"timestamp": "12345677888",
+"amount": "15000",
+"currency": "RUB",
+"userName": "roman.poludnev"
+}
+response:
+{
+"status": "succeed",
+"id": "8lICv4niUwFtEJNzoBOr"
+}
+
+https://localhost/api/v1/money/update/6x3oCP7fcJthfd5p2NII
+request body:
+{
+"category": "newCategory2",
+"amount": 13000
+}
+response:
+{
+"status": "succeed",
+"updateTimestamp": 1648669546846
+}
+
+https://localhost/api/v1/money/balance/update/BLP0dwaa1Dqs2O43aPdw - out of order
+request body:
+{
+"amount": 23000
+}
+response:
+{
+"status": "succeed",
+"updateTimestamp": 1648670472829
+}
+
+https://localhost/api/v1/money/expense/delete
+body:
+{
+"id": "Ob61YyaeLFl2C8cjFlGM"
+}
+response:
+{
+"status": "deleted",
+"time": 1648669741979
+}
+
+https://localhost/api/v1/money/income/delete
+body:
+{
+"id": "X8bZczo1sWAV11bmhU0B"
+}
+response:
+{
+"status": "deleted",
+"time": 1648669789339
+}
+
+https://localhost/api/v1/money/balance/delete
+body:
+{
+"id": "IeRJ3Sgov5NRGrcDcbSG"
+}
+response:
+{
+"status": "deleted",
+"time": 1643574252637
+}

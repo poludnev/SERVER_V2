@@ -1,70 +1,81 @@
-import { updateTraining } from '../controllers/healthController.js';
 import {
   addDocument,
   getDocuments,
   getDocumentById,
-  getDocumentsByField,
   updateDocumentData
 } from '../firebase/firebase.js';
 
+import collectionsPath from '../lib/collections/collectionsPath.js';
 import { BodyCondition, Excercise } from '../types/healthClasses.js';
-const bodyCollectionPath = 'body-test';
-const trainingCollectionPath = 'training-test';
+
+const bodyCollectionPath = collectionsPath.getBodyCollectionPath();
+const trainingCollectionPath = collectionsPath.getHealthCollectionPath();
 
 export const getBodyshandler = async () => {
-  const response = await getDocuments(bodyCollectionPath);
-  return response;
+  const data = await getDocuments(bodyCollectionPath);
+  return { status: 'succeed', data };
 };
 
 export const getBodyByIdHandler = async (id: string) => {
-  const response = await getDocumentById(bodyCollectionPath, id);
-  return response;
+  const data = await getDocumentById(bodyCollectionPath, id);
+  return { status: 'succeed', data };
 };
 
 export const getTrainingsHandler = async () => {
-  const response = await getDocuments(trainingCollectionPath);
-  return response;
+  const data = await getDocuments(trainingCollectionPath);
+  return { status: 'succeed', data };
 };
 
 export const getTrainingByIdHandler = async (id: string) => {
-  const response = await getDocumentById(trainingCollectionPath, id);
-  return response;
+  const data = await getDocumentById(trainingCollectionPath, id);
+  return { status: 'succeed', data };
 };
 
-export const updateBodyHandler = async (id: string, fieldsToUpdate: {}) => {
+export const updateBodyHandler = async (
+  id: string,
+  fieldsToUpdate: { weight?: number; hieght?: number; bmi?: number }
+) => {
   try {
-    const response = await updateDocumentData(
+    const data = await updateDocumentData(
       bodyCollectionPath,
       id,
       fieldsToUpdate
     );
-    return response;
+    return { status: 'succeed', data };
   } catch (e) {
     return { status: 'error', error: String(e) };
   }
 };
 
-export const updateTrainingHandler = async (id: string, fieldsToUpdate: {}) => {
+export const updateTrainingHandler = async (
+  id: string,
+  fieldsToUpdate: {
+    title?: string;
+    duration?: number;
+    load?: number;
+    calories?: number;
+  }
+) => {
   try {
-    const response = await updateDocumentData(
+    const data = await updateDocumentData(
       trainingCollectionPath,
       id,
       fieldsToUpdate
     );
-    return response;
+    return { status: 'succeed', data };
   } catch (e) {
     return { status: 'error', error: String(e) };
   }
 };
 
 export const addBodyHandler = async (bodyCondition: BodyCondition) => {
-  const response = await addDocument(bodyCollectionPath, bodyCondition.data);
-  return response;
+  const data = await addDocument(bodyCollectionPath, bodyCondition.data);
+  return { status: 'succeed', data };
 };
 
 export const addTrainingHandler = async (exercise: Excercise) => {
-  const response = await addDocument(trainingCollectionPath, exercise.data);
-  return response;
+  const data = await addDocument(trainingCollectionPath, exercise.data);
+  return { status: 'succeed', data };
 };
 
 export const setBodyToDeleteHandler = async (id: string) => {
