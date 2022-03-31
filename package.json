@@ -6,7 +6,8 @@
   "type": "commonjs",
   "scripts": {
     "start": "NODE_ENV=production nodemon dist/SERVER/index.js",
-    "dev": "nodemon dist/SERVER/index.js"
+    "dev": "nodemon dist/SERVER/index.js",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "repository": {
     "type": "git",

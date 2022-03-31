@@ -9,11 +9,11 @@ import {
 import { Income, Expense, Balance } from '../types/moneyClasses.js';
 const currentCollectionPath =
   process.env.NODE_ENV === 'production' ? 'money' : 'moneyTest';
-const balanceCollectionPath = 'balance-text';
+console.log('currentCollectionPath', currentCollectionPath);
 
 export const getMoneyHandler = async () => {
   const data = await getDocuments(currentCollectionPath);
-  return data;
+  return { status: 'succeed', data };
 };
 
 export const getMoneyByIdHandler = async (id: string) => {
@@ -28,7 +28,7 @@ export const getExpensesHandler = async () => {
     'type',
     'expense'
   );
-  return data;
+  return { status: 'succeed', data };
 };
 
 export const getIncomesHandler = async () => {
@@ -37,16 +37,16 @@ export const getIncomesHandler = async () => {
     'type',
     'income'
   );
-  return data;
+  return { status: 'succeed', data };
 };
 
 export const getBalanceHandler = async () => {
-  const data = await getDocuments(balanceCollectionPath);
-  return data;
+  const data = await getDocuments(currentCollectionPath);
+  return { status: 'succeed', data };
 };
 
 export const getBalanceByIdHandler = async (id: string) => {
-  const data = await getDocumentById(balanceCollectionPath, id);
+  const data = await getDocumentById(currentCollectionPath, id);
   if (data === null) return { status: 'error', error: 'id not exists' };
   return { status: 'succeed', data };
 };
@@ -78,18 +78,18 @@ export const updateBalanceHandler = async (id: string, fieldsToUpdate: {}) => {
 };
 
 export const addExpenseHandler = async (expense: Expense) => {
-  const data = await addDocument(currentCollectionPath, expense.data);
-  return data;
+  const id = await addDocument(currentCollectionPath, expense.data);
+  return { status: 'succeed', id };
 };
 
 export const addIncomeHandler = async (income: Income) => {
-  const data = await addDocument(currentCollectionPath, income.data);
-  return data;
+  const id = await addDocument(currentCollectionPath, income.data);
+  return { status: 'succeed', id };
 };
 
 export const addBalanceHandler = async (balance: Balance) => {
-  const data = await addDocument(currentCollectionPath, balance.data);
-  return data;
+  const id = await addDocument(currentCollectionPath, balance.data);
+  return { status: 'succeed', id };
 };
 
 export const setMoneyToDeleteHandler = async (id: string) => {
@@ -110,7 +110,7 @@ export const setMoneyToDeleteHandler = async (id: string) => {
 export const setBalanceToDeleteHandler = async (id: string) => {
   try {
     const deletedTimestamp = await updateDocumentData(
-      balanceCollectionPath,
+      currentCollectionPath,
       id,
       {
         toDelete: true
