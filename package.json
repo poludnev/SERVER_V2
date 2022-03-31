@@ -5,7 +5,9 @@
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
-    "start": "NODE_ENV=production nodemon dist/SERVER/index.js",
+    "build": "tsc",
+    "start": "npm run build && NODE_ENV=production node dist/SERVER/index.js",
+    "prod": "NODE_ENV=production nodemon dist/SERVER/index.js",
     "dev": "nodemon dist/SERVER/index.js",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "prerrier": "prettier --config .prettierrc 'src/**/*.ts' --write"
