@@ -6,10 +6,12 @@ import {
   getDocumentsWithoutField
 } from '../firebase/firebase.js';
 
+import collectionsPath from '../lib/collections/collectionsPath.js';
+
 import { User } from '../types/userClasses.js';
 import { Data } from '../firebase/types.js';
 
-const currentCollectionPath = 'users-test';
+const currentCollectionPath = collectionsPath.getUsersCollectionPath();
 
 export const addUserHandler = async (
   user: User
