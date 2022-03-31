@@ -6,10 +6,10 @@ import {
   updateDocumentData
 } from '../firebase/firebase.js';
 
+import collectionsPath from '../lib/collections/collectionsPath.js';
+
 import { Income, Expense, Balance } from '../types/moneyClasses.js';
-const currentCollectionPath =
-  process.env.NODE_ENV === 'production' ? 'money' : 'moneyTest';
-console.log('currentCollectionPath', currentCollectionPath);
+const currentCollectionPath = collectionsPath.getMoneyCollectionPath();
 
 export const getMoneyHandler = async () => {
   const data = await getDocuments(currentCollectionPath);
@@ -41,7 +41,11 @@ export const getIncomesHandler = async () => {
 };
 
 export const getBalanceHandler = async () => {
-  const data = await getDocuments(currentCollectionPath);
+  const data = await getDocumentsByField(
+    currentCollectionPath,
+    'type',
+    'balance'
+  );
   return { status: 'succeed', data };
 };
 
@@ -51,7 +55,10 @@ export const getBalanceByIdHandler = async (id: string) => {
   return { status: 'succeed', data };
 };
 
-export const updateMoneyHandler = async (id: string, fieldsToUpdate: {}) => {
+export const updateMoneyHandler = async (
+  id: string,
+  fieldsToUpdate: { amount?: number; balance?: number; description?: string }
+) => {
   try {
     const updateTimestamp = await updateDocumentData(
       currentCollectionPath,
@@ -64,7 +71,10 @@ export const updateMoneyHandler = async (id: string, fieldsToUpdate: {}) => {
   }
 };
 
-export const updateBalanceHandler = async (id: string, fieldsToUpdate: {}) => {
+export const updateBalanceHandler = async (
+  id: string,
+  fieldsToUpdate: { amount?: number; balance?: number; description?: string }
+) => {
   try {
     const updateTimestamp = await updateDocumentData(
       currentCollectionPath,
