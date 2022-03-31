@@ -25,7 +25,7 @@ const getDataFromSnapShot = (
 
 export const addDocument = async (
   collectionPath: string,
-  data: {}
+  data: Data
 ): Promise<string> => {
   const docRef = db.collection(collectionPath);
   const response = await docRef.add(data);
@@ -50,7 +50,7 @@ export const getDocumentById = async (collectionPath: string, id: string) => {
 export const getDocumentsByField = async (
   collectionPath: string,
   fieldName: string,
-  fieldValue: any
+  fieldValue: string | number
 ): Promise<Data> => {
   const docRef = db.collection(collectionPath);
   const snapshot = await docRef.where(fieldName, '==', fieldValue).get();
@@ -69,7 +69,7 @@ export const getDocumentsWithoutField = async (
 export const updateDocumentData = async (
   collectionPath: string,
   id: string,
-  fieldsTooUpdate: {}
+  fieldsTooUpdate: Data
 ): Promise<number | Error> => {
   const docRef = await db.collection(collectionPath).doc(id);
 
