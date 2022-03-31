@@ -90,8 +90,8 @@ export const addExpense: RequestHandler = async (req, res) => {
     Number(amount),
     currency,
     category,
-    userName,
     Number(balance),
+    userName,
     description
   );
   const response = await addExpenseHandler(expense);

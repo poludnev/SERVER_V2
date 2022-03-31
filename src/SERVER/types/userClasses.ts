@@ -7,7 +7,7 @@ export class User {
     this.login = login ? login : email;
     this.password = password;
   }
-  get data(): {} {
+  get data(): { email: string; login: string; password: string } {
     return {
       email: this.email,
       login: this.login,

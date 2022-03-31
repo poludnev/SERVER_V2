@@ -7,7 +7,7 @@ import {
 } from '../firebase/firebase.js';
 
 import { User } from '../types/userClasses.js';
-import { Data } from '../firebase/types.js';
+import { Data } from '../types/types.js';
 
 const currentCollectionPath = 'users-test';
 

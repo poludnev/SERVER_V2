@@ -7,12 +7,14 @@ export class Money {
   description: string;
   payer: string;
   payee: string;
+  balance: number;
 
   constructor(
     date: Date,
     userId: string,
     amount: number,
     curency: string,
+    balance: number,
     userName?: string,
     description?: string,
     payer?: string,
@@ -26,29 +28,49 @@ export class Money {
     this.description = description || 'NA';
     this.payer = payer || 'NA';
     this.payee = payee || 'NA';
+    this.balance = balance;
   }
 }
 
 export class Balance extends Money {
   type = 'balance';
-  balance = 0;
 
   constructor(
     date: Date,
     userId: string,
     amount: number,
     currency: string,
+    balance: number,
     userName: string,
-    balance?: number,
     description?: string,
     payer?: string,
     payee?: string
   ) {
-    super(date, userId, amount, currency, userName, description, payer, payee);
-    this.balance = balance || 0;
+    super(
+      date,
+      userId,
+      amount,
+      currency,
+      balance,
+      userName,
+      description,
+      payer,
+      payee
+    );
   }
 
-  get data(): {} {
+  get data(): {
+    date: Date;
+    userId: string;
+    amount: number;
+    currency: string;
+    userName: string;
+    type: string;
+    balance: number;
+    description: string;
+    payer: string;
+    payee: string;
+  } {
     return {
       date: this.date,
       userId: this.userId,
@@ -64,38 +86,49 @@ export class Balance extends Money {
   }
 }
 
-export class Expense {
-  date: Date;
-  userId: string;
-  amount: number;
-  currency: string;
+export class Expense extends Money {
   category: string;
   type = 'expense';
-  userName?: string;
-  balance?: number;
-  description?: string;
 
   constructor(
     date: Date,
     userId: string,
     amount: number,
-    curency: string,
+    currency: string,
     category: string,
+    balance: number,
     userName?: string,
-    balance?: number,
-    description?: string
+    description?: string,
+    payer?: string,
+    payee?: string
   ) {
-    this.date = date;
-    this.userId = userId;
-    this.amount = amount;
-    this.currency = curency;
-    this.userName = userName || 'NA';
+    super(
+      date,
+      userId,
+      amount,
+      currency,
+      balance,
+      userName,
+      description,
+      payer,
+      payee
+    );
     this.category = category || 'NA';
-    this.balance = balance || 0;
-    this.description = description || 'NA';
   }
 
-  get data(): {} {
+  get data(): {
+    date: Date;
+    userId: string;
+    amount: number;
+    currency: string;
+    userName: string;
+    category: string;
+    type: string;
+    balance: number;
+    description: string;
+    payee: string;
+    payer: string;
+  } {
     return {
       date: this.date,
       userId: this.userId,
@@ -105,40 +138,54 @@ export class Expense {
       category: this.category,
       type: this.type,
       balance: this.balance,
-      description: this.description
+      description: this.description,
+      payee: this.payee,
+      payer: this.payer
     };
   }
 }
 
-export class Income {
-  date: Date;
-  userId: string;
-  amount: number;
-  currency: string;
-  userName: string;
+export class Income extends Money {
   category: string;
   type = 'income';
-  balance?: number;
 
   constructor(
     date: Date,
     userId: string,
     amount: number,
-    curency: string,
+    currency: string,
     category: string,
+    balance: number,
+    description: string,
     userName?: string,
-    balance?: number
+    payer?: string,
+    payee?: string
   ) {
-    this.date = date || new Date();
-    this.userId = userId;
-    this.amount = amount;
-    this.currency = curency;
-    this.userName = userName || 'NA';
+    super(
+      date,
+      userId,
+      amount,
+      currency,
+      balance,
+      userName,
+      description,
+      payer,
+      payee
+    );
     this.category = category || 'NA';
     this.balance = balance || 0;
   }
 
-  get data(): {} {
+  get data(): {
+    date: Date;
+    userId: string;
+    amount: number;
+    currency: string;
+    userName: string;
+    category: string;
+    type: string;
+    balance: number;
+  } {
     return {
       date: this.date,
       userId: this.userId,
