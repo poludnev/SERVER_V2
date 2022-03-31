@@ -1,23 +1,21 @@
-import { load } from 'dotenv';
-
 export class BodyCondition {
   date: Date;
   weight: number;
   userId: string;
-  bmi: number | null;
-  height: number | null;
+  bmi: number;
+  height: number;
 
   constructor(
     date: Date,
     weight: number,
     userId: string,
-    bmi?: number | null,
+    bmi?: number,
     height?: number
   ) {
     this.date = date;
     this.weight = weight;
     this.userId = userId;
-    this.height = height || null;
+    this.height = height || 0;
     this.bmi = bmi ? bmi : this.calculateBMI();
   }
 
@@ -26,7 +24,13 @@ export class BodyCondition {
     return Number(((this.weight / this.height ** 2) * 10000).toFixed(2));
   }
 
-  get data(): {} {
+  get data(): {
+    date: Date;
+    userId: string;
+    weight: number;
+    bmi: number;
+    height: number;
+  } {
     return {
       date: this.date,
       userId: this.userId,
@@ -61,7 +65,14 @@ export class Excercise {
     this.calories = calories;
   }
 
-  get data(): {} {
+  get data(): {
+    date: Date;
+    userId: string;
+    title: string;
+    duration: number;
+    load: number;
+    calories: number;
+  } {
     return {
       date: this.date,
       userId: this.userId,

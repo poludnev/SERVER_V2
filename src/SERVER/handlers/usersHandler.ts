@@ -9,7 +9,7 @@ import {
 import collectionsPath from '../lib/collections/collectionsPath.js';
 
 import { User } from '../types/userClasses.js';
-import { Data } from '../firebase/types.js';
+import { Data } from '../types/types.js';
 
 const currentCollectionPath = collectionsPath.getUsersCollectionPath();
 

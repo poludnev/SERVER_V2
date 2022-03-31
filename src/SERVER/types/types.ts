@@ -1,3 +1,3 @@
 export type Data = {
-  [id: string | number]: {};
+  [id: string | number]: unknown;
 };
