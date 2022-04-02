@@ -2,95 +2,149 @@
 
 The 2nd version of my personal server, TypeScript.
 
-A double-server (HTTP + HTTPS) application with redirecting HTTP to HTTPS.
+A server application with redirecting HTTP to HTTPS.
 
-Users Information http requests:
+### <a id="my-header"></a> Header
 
-GET:
-/api/v1/money/users
+## <a id="users-header"></a> Users Information http requests:
+
+#### GET:
+1. [https://host_name/api/v1/money/users](#user-get-1) - returns the existing users list excluding users marked as deleted
+2. [https://host_name/api/v1/money/users/:login](#user-get-2) - returns a user information by user's login
+3. [https://host_name/api/v1/money/users/all](#user-get-3) - return all the users data including those marked as deleted
+
+#### POST:
+
+4. [https://host_name/api/v1/money/user](#user-post-4) - return all the users data including those marked as deleted
+5. [https://host_name/api/v1/money/user/delete](#user-post-5) - marks a user by login as deleted:
+
+#### GET:
+##### 1. <a id="user-get-1"></a> https://host_name/api/v1/money/users
+
+returns the existing users list excluding users marked as deleted
+
 response: 
-{
-"status": "succeed",
-"data": {
-"TH8jGSwAb3e8oHMcUwQw": {
-"password": "1234",
-"email": "email@email.com",
-"login": "newuser3"
-},
-"UNqRdRJZvLcEvSnihpcp": {
-"email": "test@email.com",
-"password": "password",
-"login": "test@email.com"
-},
-}
-}
 
-/api/v1/money/users/newuse8
-{
-"status": "succeed",
-"data": {
-"k2vkOuN5SzJk9VtxYf9r": {
-"email": "email@email.com",
-"login": "newuse8",
-"password": "1234"
-}
-}
-}
+        { 
+            "status": "succeed", 
+            "data": { 
+                "id_string1": { 
+                    "password": "1234",
+                    "email": "email@email.com",
+                    "login": "newuser3"
+                },
+                "id_string2": {
+                    "email": "test@email.com",
+                    "password": "password",
+                    "login": "test@email.com"
+                }
+            }
+        }
+###### [BACK](#users-header)
+<br>
 
-/api/v1/money/users/all
-{
-"status": "succeed",
-"data": {
-"9hadFCYofLeQN5v6SAu4": {
-"toDelete": true,
-"email": "email20@email20.com",
-"password": "1234",
-"login": "newuse22"
-},
-"BTtAA5vYT9UT3WAjxbSP": {
-"email": "email@email.com",
-"service": false,
-"toDelete": true,
-"login": "newuser3",
-"password": "asdfgf"
-},
-}
-}
+##### 2. <a id="user-get-2"></a> https://host_name/api/v1/money/users/:login
 
-POST:
-/api/v1/money/user
+returns a user information by user's login
+
+response: 
+    
+        {
+            "status": "succeed",
+            "data": {
+                "id_string": {
+                    "email": "email@email.com",
+                    "login": "newuse8",
+                    "password": "1234"
+                }
+            }
+        }
+###### [BACK](#users-header)
+<br>
+
+##### 3. <a id="user-get-3"></a> https://host_name/api/v1/money/users/all
+
+return all the users data including those marked as deleted
+
+response: 
+
+        {
+            "status": "succeed",
+            "data": {
+                "id_string1": {
+                    "toDelete": true,
+                    "email": "email20@email20.com",
+                    "password": "1234",
+                    "login": "newuse22"
+                },
+                "id_string2": {
+                    "email": "email@email.com",
+                    "service": false,
+                    "toDelete": true,
+                    "login": "newuser3",
+                    "password": "asdfgf"
+                }
+            }
+        }
+###### [BACK](#users-header)
+<br>
+
+#### POST:
+
+##### 4. <a id="user-post-4"></a> https://host_name/api/v1/money/user
+
+adds new user to the DB
+
 request body:
-{
-"login": "newuse21",
-"password": "1234",
-"email": "email20@email20.com"
-}
-response if succeed:
-{
-"status": "succeed",
-"id": "9hadFCYofLeQN5v6SAu4"
-}
-response if error:
-{
-"error": "user login already exists"
-}
+    
+        { 
+            "login": "newuser21", 
+            "password": "1234", 
+            "email": "email20@email20.com" 
+        }
 
-/api/v1/money/user/delete
+response if succeed:
+    
+        {
+            "status": "succeed",
+            "id": "id_string1"
+        }
+
+response if error:
+    
+        {
+            "error": "user login already exists"
+        }
+###### [BACK](#users-header)
+<br>
+
+##### 5. <a id="user-post-5"></a> https://host_name/api/v1/money/user/delete
+
+marks a user by login as deleted:
+
 request body:
-{
-"login": "newuse21"
-}
-response if succeed:
-{
-"status": "deleted",
-"time": 1648666049341
-}
-response if error:
-{
-"error": "no login"
-}
+    
+        {
+            "login": "newuse21"
+        }
 
-Money information http requests:
+response if succeed:
+
+        {
+            "status": "deleted",
+            "time": 1648666049341
+        }
+
+ response if error:
+
+        {
+            "error": "no login"
+        }
+###### [BACK](#users-header)
+<br>
+
+## Money information http requests:
+
 GET:
 api/v1/money/get
 response:
