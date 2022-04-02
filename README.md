@@ -6,6 +6,45 @@ A server application with redirecting HTTP to HTTPS.
 
 <br>
 
+## Configure the SERVER (config.env)
+
+<br>
+
+As the basic server is HTTPS, you should configure cetrificate to make it work. 
+Please point out our certificates path in the config.env:
+
+
+CERT_ADDRESS - catalog where the certs are located
+
+CERT_NAME - name of your certificates. 
+
+
+For instance, you certs are in the following folder:
+
+/cert/CA/localhost/localhost.crt
+
+/cert/CA/localhost/localhost.key
+
+
+Fill in the config.env:
+
+CERT_ADDRESS=cert/CA/localhost/
+
+CERT_NAME=localhost
+
+
+<br>
+
+GOOGLE_APPLICATION_CREDENTIALS - fill in the address of the firebase credentials. 
+
+Please refer to the official docs: https://firebase.google.com/docs/admin/setup
+
+
+
+
+
+<br>
+
 ## <a id="users-header"></a> Users Information http requests:
 
 #### GET:
