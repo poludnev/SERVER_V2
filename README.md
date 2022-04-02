@@ -2,26 +2,26 @@
 
 The 2nd version of my personal server, TypeScript.
 
-A double-server (HTTP + HTTPS) application with redirecting HTTP to HTTPS.
+A server application with redirecting HTTP to HTTPS.
 
 ### <a id="my-header"></a> Header
 
 ## <a id="users-header"></a> Users Information http requests:
 
-GET:
-1. [https://host_name/api/v1/money/users](#user-get-1) - returns the existing users list with user marked as deleted
+#### GET:
+1. [https://host_name/api/v1/money/users](#user-get-1) - returns the existing users list excluding users marked as deleted
 2. [https://host_name/api/v1/money/users/:login](#user-get-2) - returns a user information by user's login
 3. [https://host_name/api/v1/money/users/all](#user-get-3) - return all the users data including those marked as deleted
 
-POST:
+#### POST:
 
 4. [https://host_name/api/v1/money/user](#user-post-4) - return all the users data including those marked as deleted
-5. [https://host_name/api/v1/money/user/delete](#user-post-5) - return all the users data including those marked as deleted
+5. [https://host_name/api/v1/money/user/delete](#user-post-5) - marks a user by login as deleted:
 
-### GET:
-1. <a id="user-get-1"></a> https://host_name/api/v1/money/users
+#### GET:
+##### 1. <a id="user-get-1"></a> https://host_name/api/v1/money/users
 
-returns the existing users list with user marked as deleted
+returns the existing users list excluding users marked as deleted
 
 response: 
 
@@ -40,10 +40,10 @@ response:
                 }
             }
         }
-        
-[BACK](#users-header)
+###### [BACK](#users-header)
+<br>
 
-2. <a id="user-get-2"></a> https://host_name/api/v1/money/users/:login
+##### 2. <a id="user-get-2"></a> https://host_name/api/v1/money/users/:login
 
 returns a user information by user's login
 
@@ -59,14 +59,14 @@ response:
                 }
             }
         }
-        
-[BACK](#users-header)
+###### [BACK](#users-header)
+<br>
 
-3. <a id="user-get-3"></a> https://host_name/api/v1/money/users/all
+##### 3. <a id="user-get-3"></a> https://host_name/api/v1/money/users/all
 
 return all the users data including those marked as deleted
 
-    response: 
+response: 
 
         {
             "status": "succeed",
@@ -86,12 +86,12 @@ return all the users data including those marked as deleted
                 }
             }
         }
-        
-[BACK](#users-header)
+###### [BACK](#users-header)
+<br>
 
-### POST:
+#### POST:
 
-4. <a id="user-post-4"></a> https://host_name/api/v1/money/user
+##### 4. <a id="user-post-4"></a> https://host_name/api/v1/money/user
 
 adds new user to the DB
 
@@ -115,8 +115,12 @@ response if error:
         {
             "error": "user login already exists"
         }
+###### [BACK](#users-header)
+<br>
 
-5. <a id="user-post-5"></a> https://host_name/api/v1/money/user/delete
+##### 5. <a id="user-post-5"></a> https://host_name/api/v1/money/user/delete
+
+marks a user by login as deleted:
 
 request body:
     
@@ -136,7 +140,8 @@ response if succeed:
         {
             "error": "no login"
         }
-
+###### [BACK](#users-header)
+<br>
 
 ## Money information http requests:
 
