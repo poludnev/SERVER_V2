@@ -4,7 +4,7 @@ The 2nd version of my personal server, TypeScript.
 
 A server application with redirecting HTTP to HTTPS.
 
-### <a id="my-header"></a> Header
+<br>
 
 ## <a id="users-header"></a> Users Information http requests:
 
@@ -18,6 +18,54 @@ A server application with redirecting HTTP to HTTPS.
 
 4. [https://host_name/api/v1/money/user](#user-post-4) - return all the users data including those marked as deleted
 5. [https://host_name/api/v1/money/user/delete](#user-post-5) - marks a user by login as deleted:
+
+<br>
+
+## <a id="money-header"></a> Money information http requests:
+
+#### GET:
+
+1. [https://host_name/api/v1/money/get](#money-get-1) - returns existing transactions list excluding those marked as deleted
+2. [https://localhost/api/v1/money/expense/get](#money-get-2) - returns expense-type transactions
+3. [https://localhost/api/v1/money/income/get](#money-get-3) - returns income-type transactions
+4. [https://localhost/api/v1/money/balance/get](#money-get-4) - returns balance-type transactions
+5. [https://localhost/api/v1/money/get/:id](#money-get-5) - returns expnese or income transactions by id
+6. [https://localhost/api/v1/money/balance/get/:id](#money-get-6) returns balance transactions by id
+
+#### POST:
+
+7. [https://localhost/api/v1/money/expense/add/](#money-post-7) - adds an expense transaction
+8. [https://localhost/api/v1/money/income/add/](#money-post-8) - adds an income transaction
+9. [https://localhost/api/v1/money/balance/add/](#money-post-9) - adds a balance transaction
+10. [https://localhost/api/v1/money/update/:id](#money-post-10) - updates an expence or income transaction information by id
+11. [https://localhost/api/v1/money/balance/update/:id](#money-post-11) - updates a balance transaction information by id
+12. [https://localhost/api/v1/money/expense/delete](#money-post-12) - marks an expense tranaction as deleted
+13. [https://localhost/api/v1/money/income/delete](#money-post-13) - marks an income transaction as deleted
+14. [https://localhost/api/v1/money/balance/delete](#money-post-14) - marks a balance transaction as deleted
+
+<br>
+
+## <a id="health-header"></a> Health and training Information http requests:
+
+#### GET:
+
+1. [https://localhost/api/v1/health/body/get](#health-get-1) - returns health data without those marked as deleted
+2. [https://localhost/api/v1/health/training/get](#health-get-2) - returns training data without those marked as deleted
+3. [https://localhost/api/v1/health/body/get/:id](#health-get-3) - returns health data by id
+4. [https://localhost/api/v1/health/training/get/:id](#health-get-4) - returns training data by id
+
+#### POST:
+
+5. [https://localhost/api/v1/health/body/update](#health-post-5) - updates health data by id
+6. [https://localhost/api/v1/health/training/update](#health-post-6) - updates training data by id
+7. [https://localhost/api/v1/health/body/add](#health-post-7) - adds health data
+8. [https://localhost/api/v1/health/training/add](#health-post-8) - adds training data
+9. [https://localhost/api/v1/health/body/delete](#health-post-9) - deletes health data
+10. [https://localhost/api/v1/health/training/delete](#health-post-10) - deletes training data
+
+<br>
+
+## <a id="users-header"></a> Users Information http requests:
 
 #### GET:
 
@@ -587,5 +635,289 @@ response:
         }
 
 ###### [BACK](#money-header)
+
+<br>
+
+## <a id="health-header"></a> Health and training Information http requests:
+
+#### GET:
+
+##### 1. <a id="health-get-1"></a> https://localhost/api/v1/health/body/get
+
+returns health data without those marked as deleted
+
+response:
+
+        {
+            "status": "succeed",
+            "data": {
+                "2Dao1HYElsfNyeUWIdDo": {
+                    "height": null,
+                    "bmi": 0,
+                    "weight": 105,
+                    "date": {
+                        "_seconds": 1234511364,
+                        "_nanoseconds": 666000000
+                    },
+                    "userId": "BTtAA5vYT9UT3WAjxbSP",
+                    "timestamp": 1234511364666
+                },
+                "396baFbGjIRA1mTclhsh": {
+                    "date": {
+                        "_seconds": 1234511364,
+                        "_nanoseconds": 666000000
+                    },
+                    "bmi": 30,
+                    "userId": "BTtAA5vYT9UT3WAjxbSP",
+                    "height": 180,
+                    "weight": 99,
+                    "timestamp": 1234511364666
+                },
+            }
+        }
+
+###### [BACK](#health-header)
+
+<br>
+
+##### 2. <a id="health-get-2"></a> https://localhost/api/v1/health/training/get
+
+returns training data without those marked as deleted
+
+response:
+
+        {
+            "status": "succeed",
+            "data": {
+                "bdYIgYgG4heYjJlUuHIO": {
+                    "date": {
+                        "_seconds": 12341234,
+                        "_nanoseconds": 131000000
+                    },
+                    "duration": 1345164,
+                    "userId": "UNqRdRJZvLcEvSnihpcp",
+                    "calories": 100,
+                    "title": "row",
+                    "load": 9,
+                    "timestamp": 12341234131
+                },
+                "nnGZFsAHz1KCU1rJULAM": {
+                    "date": {
+                        "_seconds": 12341234,
+                        "_nanoseconds": 131000000
+                    },
+                    "title": "row",
+                    "userId": "UNqRdRJZvLcEvSnihpcp",
+                    "duration": 1345164,
+                    "calories": 100,
+                    "load": 9,
+                    "timestamp": 12341234131
+                }
+            }
+        }
+
+###### [BACK](#health-header)
+
+<br>
+
+##### 3. <a id="health-get-3"></a> https://localhost/api/v1/health/body/get/:id
+
+returns health data by id
+
+response:
+
+        {
+            "status": "succeed",
+            "data": {
+                "weight": 105,
+                "bmi": 0,
+                "date": {
+                    "_seconds": 1234511364,
+                    "_nanoseconds": 666000000
+                },
+                "height": null,
+                "userId": "BTtAA5vYT9UT3WAjxbSP",
+                "timestamp": 1234511364666
+            }
+        }
+
+###### [BACK](#health-header)
+
+<br>
+
+##### 4. <a id="health-get-4"></a> https://localhost/api/v1/health/training/get/:id
+
+returns training data by id
+
+response:
+
+        {
+            "status": "succeed",
+            "data": {
+                "date": {
+                    "_seconds": 12341234,
+                    "_nanoseconds": 131000000
+                },
+                "load": 9,
+                "userId": "UNqRdRJZvLcEvSnihpcp",
+                "calories": 100,
+                "duration": 1345164,
+                "title": "row",
+                "timestamp": 12341234131
+            }
+        }
+
+###### [BACK](#health-header)
+
+<br>
+
+#### POST:
+
+##### 5. <a id="health-post-5"></a> https://localhost/api/v1/health/body/update
+
+updates health data by id
+
+request body:
+
+        {
+            "id": "396baFbGjIRA1mTclhsh",
+            "fieldsToUpdate": {
+                "weight": 99,
+                "bmi": 30,
+                "height": 180
+            }
+        }
+
+response:
+
+        {
+            "updateBody": "ok",
+            "updateTimestamp": 1643636135835
+        }
+
+###### [BACK](#health-header)
+
+<br>
+
+##### 6. <a id="health-post-6"></a> https://localhost/api/v1/health/training/update
+
+updates training data by id
+
+request body:
+
+        {
+            "id": "g1FoPPGlYS3XQor7E7MJ",
+            "fieldsToUpdate": {
+                "load": 20,
+                "title": "cycle"
+            }
+        }
+
+response:
+
+        {
+            "updateTraining": "ok",
+            "updateTimestamp": 1643636291726
+        }
+
+###### [BACK](#health-header)
+
+<br>
+
+##### 7. <a id="health-post-7"></a> https://localhost/api/v1/health/body/add
+
+adds health data
+
+request body:
+
+        {
+            "login": "newuser3",
+            "timestamp": 1234511364666,
+            "weight": 105,
+            "height": 180
+        }
+
+response:
+
+        {
+            "addBody": "ok",
+            "id": "I92iBSG04bX1Je5d3Ryo"
+        }
+
+###### [BACK](#health-header)
+
+<br>
+
+##### 8. <a id="health-post-8"></a> https://localhost/api/v1/health/training/add
+
+adds training data
+
+request body:
+
+        {
+            "login": "test@email.com",
+            "title": "row",
+            "duration": 1345164,
+            "load": 9,
+            "timestamp": 12341234131,
+            "calories": 100
+        }
+
+response:
+
+        {
+            "status": "succeed",
+            "id": "cgHg8oVpvHXtFGiYOTbf"
+        }
+
+###### [BACK](#health-header)
+
+<br>
+
+##### 9. <a id="health-post-9"></a> https://localhost/api/v1/health/body/delete
+
+deletes health data
+
+reqeust body:
+
+        {
+            "id": "I92iBSG04bX1Je5d3Ryo"
+        }
+
+response:
+
+        {
+            "deleteBody": "ok",
+            "response": {
+                "status": "deleted",
+                "time": 1648672372844
+            }
+        }
+
+###### [BACK](#health-header)
+
+<br>
+
+##### 10. <a id="health-post-10"></a> https://localhost/api/v1/health/training/delete
+
+deletes training data
+
+request body:
+
+        {
+            "id": "6UifqhixQQDOe1WZLE3m"
+        }
+
+response:
+
+        {
+            "deleteTraining": "ok",
+            "response": {
+                "status": "deleted",
+                "time": 1648672356895
+            }
+        }
+
+###### [BACK](#health-header)
 
 <br>
