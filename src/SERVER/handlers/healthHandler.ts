@@ -1,9 +1,4 @@
-import {
-  addDocument,
-  getDocuments,
-  getDocumentById,
-  updateDocumentData
-} from '../firebase/firebase.js';
+import database from '../firebase/firebase.js';
 
 import collectionsPath from '../lib/collections/collectionsPath.js';
 import { BodyCondition, Excercise } from '../types/healthClasses.js';
@@ -12,22 +7,22 @@ const bodyCollectionPath = collectionsPath.getBodyCollectionPath();
 const trainingCollectionPath = collectionsPath.getHealthCollectionPath();
 
 export const getBodyshandler = async () => {
-  const data = await getDocuments(bodyCollectionPath);
+  const data = await database.getDocuments(bodyCollectionPath);
   return { status: 'succeed', data };
 };
 
 export const getBodyByIdHandler = async (id: string) => {
-  const data = await getDocumentById(bodyCollectionPath, id);
+  const data = await database.getDocumentById(bodyCollectionPath, id);
   return { status: 'succeed', data };
 };
 
 export const getTrainingsHandler = async () => {
-  const data = await getDocuments(trainingCollectionPath);
+  const data = await database.getDocuments(trainingCollectionPath);
   return { status: 'succeed', data };
 };
 
 export const getTrainingByIdHandler = async (id: string) => {
-  const data = await getDocumentById(trainingCollectionPath, id);
+  const data = await database.getDocumentById(trainingCollectionPath, id);
   return { status: 'succeed', data };
 };
 
@@ -36,7 +31,7 @@ export const updateBodyHandler = async (
   fieldsToUpdate: { weight?: number; hieght?: number; bmi?: number }
 ) => {
   try {
-    const data = await updateDocumentData(
+    const data = await database.updateDocumentData(
       bodyCollectionPath,
       id,
       fieldsToUpdate
@@ -57,7 +52,7 @@ export const updateTrainingHandler = async (
   }
 ) => {
   try {
-    const data = await updateDocumentData(
+    const data = await database.updateDocumentData(
       trainingCollectionPath,
       id,
       fieldsToUpdate
@@ -69,18 +64,18 @@ export const updateTrainingHandler = async (
 };
 
 export const addBodyHandler = async (bodyCondition: BodyCondition) => {
-  const data = await addDocument(bodyCollectionPath, bodyCondition.data);
-  return { status: 'succeed', data };
+  const id = await database.addDocument(bodyCollectionPath, bodyCondition.data);
+  return { status: 'succeed', id };
 };
 
 export const addTrainingHandler = async (exercise: Excercise) => {
-  const data = await addDocument(trainingCollectionPath, exercise.data);
-  return { status: 'succeed', data };
+  const id = await database.addDocument(trainingCollectionPath, exercise.data);
+  return { status: 'succeed', id };
 };
 
 export const setBodyToDeleteHandler = async (id: string) => {
   try {
-    const deletedTimestamp = await updateDocumentData(bodyCollectionPath, id, {
+    const deletedTimestamp = await database.updateDocumentData(bodyCollectionPath, id, {
       toDelete: true
     });
     return { status: 'deleted', time: deletedTimestamp };
@@ -91,7 +86,7 @@ export const setBodyToDeleteHandler = async (id: string) => {
 
 export const setTrainingToDeleteHandler = async (id: string) => {
   try {
-    const deletedTimestamp = await updateDocumentData(
+    const deletedTimestamp = await database.updateDocumentData(
       trainingCollectionPath,
       id,
       {

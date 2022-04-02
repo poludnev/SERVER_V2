@@ -1,10 +1,4 @@
-import {
-  addDocument,
-  getDocuments,
-  getDocumentById,
-  getDocumentsByField,
-  updateDocumentData
-} from '../firebase/firebase.js';
+import database from '../firebase/firebase.js';
 
 import collectionsPath from '../lib/collections/collectionsPath.js';
 
@@ -12,18 +6,18 @@ import { Income, Expense, Balance } from '../types/moneyClasses.js';
 const currentCollectionPath = collectionsPath.getMoneyCollectionPath();
 
 export const getMoneyHandler = async () => {
-  const data = await getDocuments(currentCollectionPath);
+  const data = await database.getDocuments(currentCollectionPath);
   return { status: 'succeed', data };
 };
 
 export const getMoneyByIdHandler = async (id: string) => {
-  const data = await getDocumentById(currentCollectionPath, id);
+  const data = await database.getDocumentById(currentCollectionPath, id);
   if (data === null) return { status: 'error', error: 'id not exists' };
   return { status: 'succeed', data };
 };
 
 export const getExpensesHandler = async () => {
-  const data = await getDocumentsByField(
+  const data = await database.getDocumentsByField(
     currentCollectionPath,
     'type',
     'expense'
@@ -32,7 +26,7 @@ export const getExpensesHandler = async () => {
 };
 
 export const getIncomesHandler = async () => {
-  const data = await getDocumentsByField(
+  const data = await database.getDocumentsByField(
     currentCollectionPath,
     'type',
     'income'
@@ -41,7 +35,7 @@ export const getIncomesHandler = async () => {
 };
 
 export const getBalanceHandler = async () => {
-  const data = await getDocumentsByField(
+  const data = await database.getDocumentsByField(
     currentCollectionPath,
     'type',
     'balance'
@@ -50,7 +44,7 @@ export const getBalanceHandler = async () => {
 };
 
 export const getBalanceByIdHandler = async (id: string) => {
-  const data = await getDocumentById(currentCollectionPath, id);
+  const data = await database.getDocumentById(currentCollectionPath, id);
   if (data === null) return { status: 'error', error: 'id not exists' };
   return { status: 'succeed', data };
 };
@@ -60,7 +54,7 @@ export const updateMoneyHandler = async (
   fieldsToUpdate: { amount?: number; balance?: number; description?: string }
 ) => {
   try {
-    const updateTimestamp = await updateDocumentData(
+    const updateTimestamp = await database.updateDocumentData(
       currentCollectionPath,
       id,
       fieldsToUpdate
@@ -76,7 +70,7 @@ export const updateBalanceHandler = async (
   fieldsToUpdate: { amount?: number; balance?: number; description?: string }
 ) => {
   try {
-    const updateTimestamp = await updateDocumentData(
+    const updateTimestamp = await database.updateDocumentData(
       currentCollectionPath,
       id,
       fieldsToUpdate
@@ -88,23 +82,23 @@ export const updateBalanceHandler = async (
 };
 
 export const addExpenseHandler = async (expense: Expense) => {
-  const id = await addDocument(currentCollectionPath, expense.data);
+  const id = await database.addDocument(currentCollectionPath, expense.data);
   return { status: 'succeed', id };
 };
 
 export const addIncomeHandler = async (income: Income) => {
-  const id = await addDocument(currentCollectionPath, income.data);
+  const id = await database.addDocument(currentCollectionPath, income.data);
   return { status: 'succeed', id };
 };
 
 export const addBalanceHandler = async (balance: Balance) => {
-  const id = await addDocument(currentCollectionPath, balance.data);
+  const id = await database.addDocument(currentCollectionPath, balance.data);
   return { status: 'succeed', id };
 };
 
 export const setMoneyToDeleteHandler = async (id: string) => {
   try {
-    const deletedTimestamp = await updateDocumentData(
+    const deletedTimestamp = await database.updateDocumentData(
       currentCollectionPath,
       id,
       {
@@ -119,7 +113,7 @@ export const setMoneyToDeleteHandler = async (id: string) => {
 
 export const setBalanceToDeleteHandler = async (id: string) => {
   try {
-    const deletedTimestamp = await updateDocumentData(
+    const deletedTimestamp = await database.updateDocumentData(
       currentCollectionPath,
       id,
       {

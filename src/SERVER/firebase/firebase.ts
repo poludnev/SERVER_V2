@@ -79,3 +79,12 @@ export const updateDocumentData = async (
   const res = await docRef.update(fieldsTooUpdate);
   return await res.writeTime.toMillis();
 };
+
+export default {
+  addDocument,
+  getDocuments,
+  getDocumentById,
+  getDocumentsByField,
+  getDocumentsWithoutField,
+  updateDocumentData
+};
