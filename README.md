@@ -6,6 +6,21 @@ A server application with redirecting HTTP to HTTPS.
 
 <br>
 
+## Install and Run
+
+
+<br>
+To install: 
+
+npm install
+
+<br>
+To run:
+
+npm start
+
+<br>
+
 ## Configure the SERVER (config.env)
 
 <br>
